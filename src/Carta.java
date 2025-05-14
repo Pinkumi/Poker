@@ -28,7 +28,7 @@ public class Carta  extends JLabel {
 
     public boolean esIgualA(Carta otraCarta){
         if(valor == otraCarta.valor){
-            if(figura.equals(otraCarta.palo)){
+            if(figura.equals(otraCarta.figura)){
                 return true;
             }
         }
