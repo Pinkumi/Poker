@@ -18,12 +18,38 @@ public class Carta  extends JLabel {
 
 
 
-    public int getValor() {
+    public int getValor(){
         return valor;
     }
 
-    public String getFigura() {
+    public String getpalo(){
         return figura;
     }
+
+    public boolean esIgualA(Carta otraCarta){
+        if(valor == otraCarta.valor){
+            if(figura.equals(otraCarta.palo)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean tieneElMismoValor(Carta otraCarta){
+        if(valor == otraCarta.valor){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean tieneLaMismapalo(Carta otraCarta){
+        if(figura.equals(otraCarta.figura)){
+            return true;
+        }
+        return false;
+    }
+
 
 }
