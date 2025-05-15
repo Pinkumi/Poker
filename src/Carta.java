@@ -17,8 +17,8 @@ public class Carta extends JLabel {
     public Carta(int valor, String figura) {
         this.valor = valor;
         this.figura = figura;
-        this.width = 200;
-        this.height = 300;
+        this.width = 100;
+        this.height = 150;
         this.xPos = 0;
         this.yPos = 0;
         this.esVisible=true;
@@ -52,8 +52,8 @@ public class Carta extends JLabel {
             default -> "";
         };
         valorSupLabel.setText(String.valueOf(valor)+figuraEmoji); valorInfLabel.setText(String.valueOf(valor)+figuraEmoji);
-        valorSupLabel.setFont(new Font("SansSerif", Font.PLAIN, width/9));
-        valorInfLabel.setFont(new Font("SansSerif", Font.PLAIN, width/9));
+        valorSupLabel.setFont(new Font("SansSerif", Font.PLAIN, (width/10)+5));
+        valorInfLabel.setFont(new Font("SansSerif", Font.PLAIN, (width/10)+5));
         valorSupLabel.setBounds(0,0, (width - (width-(width/2)))/2, (height - (height-(height/3)))/2);
         valorInfLabel.setBounds(width - ((width - (width-(width/2)))/2), height -((height - (height-(height/3)))/2) , (width - (width-(width/2)))/2, (height - (height-(height/3)))/2);
     }

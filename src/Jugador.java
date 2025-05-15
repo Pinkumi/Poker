@@ -3,11 +3,13 @@ import java.util.ArrayList;
 public class Jugador {
     // clase de jugador
     private int numFichas;
-    public ArrayList<Carta> mano;
+    public Mano mano;
     private int nJugador;
-    Jugador(int nJugador) {
+    Jugador(int nJugador, Mano mano) {
         this.nJugador = nJugador;
+        this.mano = mano;
         numFichas = 0;
+
     }
     public void agregarFichas(int numFichas)
     {
@@ -17,7 +19,7 @@ public class Jugador {
     {
         return numFichas;
     }
-    public ArrayList<Carta> getMano(){
+    public Mano getMano(){
         return mano;
     }
     public String toString()

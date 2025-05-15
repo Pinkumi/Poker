@@ -21,6 +21,14 @@ public class Baraja {
     public void mezclarCartas(){
         Collections.shuffle(cartas);
     }
+    public ArrayList<Carta> getCartas() {
+        return cartas;
+    }
+    public void changeSizeCards(int size){
+        int width = (size*2)/3;
+        cartas.forEach(a -> a.changeSize(width,size));
+
+    }
     public ArrayList<Carta> extraerCartas(int numCartas){
         ArrayList<Carta> cartasExtraidas = new ArrayList<>();
         for (int i=0; i<5; i++) {
@@ -28,5 +36,8 @@ public class Baraja {
             cartasExtraidas.add(carta);
         }
         return cartasExtraidas;
+    }
+    public int getNumCartas(){
+        return cartas.size();
     }
 }
