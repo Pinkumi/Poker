@@ -46,5 +46,11 @@ public class prueba {
         frame.add(cartaPrueba10);
         frame.setVisible(true);
 
+        cartaPrueba1.voltear();
+        cartaPrueba8.voltear();
+
+        cartaPrueba8.voltear();
+        cartaPrueba8.voltear();
+
     }
 }
