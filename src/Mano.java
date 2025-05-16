@@ -81,13 +81,10 @@ public class Mano {
         if(!mismoPalo()){
             return false;
         }
-
         Set<Integer> valoresRoyalFlush = new HashSet<>(Arrays.asList(10, 11, 12, 13, 1));
-
         Set<Integer> valoresMano = cartas.stream()
                 .map(Carta::getValor)
                 .collect(Collectors.toSet());
-
         return valoresMano.containsAll(valoresRoyalFlush);
     }
 
