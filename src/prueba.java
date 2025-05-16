@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class prueba {
@@ -28,6 +29,9 @@ public class prueba {
             y += baraja.getCartas().get(0).getHeight()+5;
             x = 15;
         }
+        ImageIcon logo = new ImageIcon("images/logo.png");
+        frame.setIconImage(logo.getImage());
+        frame.getContentPane().setBackground( new Color(4,117,0) );
         frame.setVisible(true);
     }
 }
