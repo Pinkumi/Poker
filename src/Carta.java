@@ -79,6 +79,9 @@ public class Carta extends JLabel {
         }
         esVisible = !esVisible;
     }
+    public boolean esVisible(){
+        return esVisible;
+    }
     private ImageIcon encontrarIcon() {
         String directorio = "";
         String figuraReal = switch (valor) {
@@ -97,7 +100,6 @@ public class Carta extends JLabel {
         }
         return new ImageIcon(img);
     }
-
     public void changeSize(int width, int height) {
         this.width = width;
         this.height = height;
@@ -105,34 +107,27 @@ public class Carta extends JLabel {
         definirIcon();
         repaint();
         revalidate();
-
     }
-
     public void changePosition(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
         setBounds(xPos, yPos, width, height);
     }
-
     public int getValor() {
         return valor;
     }
-
     public String getFigura() {
         return figura;
     }
-
     public boolean esIgualA(Carta otraCarta) {
         if (valor == otraCarta.valor) {
             return figura.equals(otraCarta.figura);
         }
         return false;
     }
-
     public boolean tieneElMismoValor(Carta otraCarta) {
         return valor == otraCarta.valor;
     }
-
     public boolean tieneMismaFigura(Carta otraCarta) {
         return figura.equals(otraCarta.figura);
     }

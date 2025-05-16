@@ -8,7 +8,7 @@ public class prueba {
         frame.setLayout(null);
         frame.setSize(1366, 1700);
         Baraja baraja = new Baraja();
-        baraja.changeSizeCards(150);
+        baraja.changeSizeCards(210);
         //baraja.mezclarCartas();
         int y = 10;
         int x = 15;
@@ -18,6 +18,10 @@ public class prueba {
                 Carta carta = baraja.getCartas().get(cartaPos);
                 carta.setLocation(x, y);
                 frame.add(carta);
+                if(carta.getValor()%2==1){
+                    carta.voltear();
+
+                }
                 x += carta.getWidth()+5;
                 cartaPos++;
             }
