@@ -19,8 +19,6 @@ public class Mano {
         cartas.add(carta);
     }
 
-    //Aqui van las funciones para detectar las jugadas por mano, ej; hayPar(), hayEscalera(), hayEscaleraReal()
-
     public void ordenarMano(){
         cartas.sort(Comparator.comparing(v -> v.getValor()));
     }
