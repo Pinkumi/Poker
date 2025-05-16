@@ -45,17 +45,25 @@ public class Carta extends JLabel {
         Image img = new ImageIcon("images/carta_trasera.png").getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
         setDisabledIcon(new ImageIcon(img));
         String figuraEmoji = switch (figura) {
-            case "corazon" -> "🖤";
-            case "trebol" -> "🍀";
+            case "corazon" -> "♥";
+            case "trebol" -> "♣";
             case "pica" -> "♠";
             case "diamante" -> "♦";
             default -> "";
         };
-        valorSupLabel.setText(String.valueOf(valor)+figuraEmoji); valorInfLabel.setText(String.valueOf(valor)+figuraEmoji);
-        valorSupLabel.setFont(new Font("SansSerif", Font.PLAIN, (width/10)+5));
-        valorInfLabel.setFont(new Font("SansSerif", Font.PLAIN, (width/10)+5));
-        valorSupLabel.setBounds(0,0, (width - (width-(width/2)))/2, (height - (height-(height/3)))/2);
-        valorInfLabel.setBounds(width - ((width - (width-(width/2)))/2), height -((height - (height-(height/3)))/2) , (width - (width-(width/2)))/2, (height - (height-(height/3)))/2);
+        String valorTexto = switch (valor) {
+            case 11 -> "J";
+            case 12 -> "Q";
+            case 13 -> "K";
+            case 1 -> "A";
+            default -> String.valueOf(valor);
+        };
+        valorSupLabel.setText(valorTexto+figuraEmoji); valorInfLabel.setText(figuraEmoji+valorTexto);
+        //valorSupLabel.setText(valorTexto); valorInfLabel.setText(valorTexto);
+        valorSupLabel.setFont(new Font("Times New Roman", Font.PLAIN, (width/6)+2));
+        valorInfLabel.setFont(new Font("Times New Roman", Font.PLAIN, (width/6)+2));
+        valorSupLabel.setBounds(((width/7))/2,0, (width+20 - (width-(width/2)))/2, (height - (height-(height/3)))/2);
+        valorInfLabel.setBounds(width - (((width/6)+2)/2+(width - (width-(width/2)))/2), height -((height - (height-(height/3)))/2) , (width+20 - (width-(width/2)))/2, (height - (height-(height/3)))/2);
     }
     public void voltear() {
         if(esVisible){

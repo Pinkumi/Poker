@@ -6,20 +6,24 @@ public class prueba {
         JFrame frame = new JFrame("Prueba");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
-        frame.setSize(1500, 1500);
+        frame.setSize(1366, 1700);
         Baraja baraja = new Baraja();
-        int x = 0;
-        int y = 0;
-        baraja.changeSizeCards(300);
-        baraja.mezclarCartas();
-        for(int i = 0; i<5; i++){
-            Carta carta = baraja.getCartas().get(i);
-            carta.changePosition(x, y);
-            frame.add(carta);
-            x += carta.getWidth();
+        baraja.changeSizeCards(150);
+        //baraja.mezclarCartas();
+        int y = 10;
+        int x = 15;
+        int cartaPos = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 13; j++) {
+                Carta carta = baraja.getCartas().get(cartaPos);
+                carta.setLocation(x, y);
+                frame.add(carta);
+                x += carta.getWidth()+5;
+                cartaPos++;
+            }
+            y += baraja.getCartas().get(0).getHeight()+5;
+            x = 15;
         }
         frame.setVisible(true);
-
-
     }
 }
