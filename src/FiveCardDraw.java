@@ -3,4 +3,9 @@ public class FiveCardDraw extends Poker{
     public FiveCardDraw(){
 
     }
+
+    @Override
+    protected void repartirCartas() {
+
+    }
 }

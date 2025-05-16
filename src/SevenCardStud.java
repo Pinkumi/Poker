@@ -4,4 +4,9 @@ public class SevenCardStud extends Poker{
 
     }
 
+    @Override
+    protected void repartirCartas() {
+
+    }
+
 }
