@@ -17,6 +17,7 @@ public class Menu extends JFrame {
         Image botonStartImage = new ImageIcon("images/start.png").getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH);
         JLabel fondoLabel = new JLabel(new ImageIcon(fondoImage));
         fondoLabel.setLayout(null);
+
         modoJuego = new JComboBox<>();
         modoJuego.addItem("Five Card Draw");
         modoJuego.addItem("Seven Card Stud");
