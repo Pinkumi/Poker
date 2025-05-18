@@ -9,7 +9,7 @@ public class prueba {
         frame.setLayout(null);
         frame.setSize(1366, 1700);
         Baraja baraja = new Baraja();
-        baraja.changeSizeCards(190);
+        baraja.changeSizeCards(170);
         //baraja.mezclarCartas();
         int y = 10;
         int x = 15;

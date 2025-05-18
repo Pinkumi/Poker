@@ -1,7 +1,9 @@
 public class SevenCardStud extends Poker{
     //segunda modalidad de juego (subclase de Poker)
-    public SevenCardStud(){
-        super();
+    private int nJugadores;
+    public SevenCardStud(int nJugadores){
+        this.nJugadores = nJugadores;
+        super(nJugadores);
         setTitle("Seven Card Stud");
     }
 
