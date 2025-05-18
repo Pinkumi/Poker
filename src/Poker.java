@@ -4,7 +4,7 @@ import java.awt.*;
 public abstract class Poker extends JFrame{
     // clase padre de juego poker
     protected final int WIDTH_SIZE = 1900;
-    protected final int HEIGHT_SIZE = 1000;
+    protected final int HEIGHT_SIZE = 1060;
 
     protected int nJugadores;
     protected JButton foldButton;
