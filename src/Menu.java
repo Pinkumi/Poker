@@ -13,8 +13,8 @@ public class Menu extends JFrame {
         ImageIcon logo = new ImageIcon("images/logo.png");
         setIconImage(logo.getImage());
         setLocationRelativeTo(null);
+
         Image fondoImage = new ImageIcon("images/pokerMenu.png").getImage().getScaledInstance(800,500,Image.SCALE_SMOOTH);
-        Image botonStartImage = new ImageIcon("images/start.png").getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH);
         JLabel fondoLabel = new JLabel(new ImageIcon(fondoImage));
         fondoLabel.setLayout(null);
 
@@ -27,6 +27,7 @@ public class Menu extends JFrame {
         cantJugadores.setModel(new SpinnerNumberModel(2,2,8,1));
         cantJugadores.setBounds(380,250,40,30);
 
+        Image botonStartImage = new ImageIcon("images/botones/start.png").getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH);
         iniciarBtn = new JButton(new ImageIcon(botonStartImage));
         iniciarBtn.setBounds(350,300,100,100);
         iniciarBtn.setContentAreaFilled(false);
@@ -35,7 +36,6 @@ public class Menu extends JFrame {
         fondoLabel.add(iniciarBtn);
         fondoLabel.add(cantJugadores);
         fondoLabel.add(modoJuego);
-
 
         setContentPane(fondoLabel);
         iniciarBtn.addActionListener(e -> {

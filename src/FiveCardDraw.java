@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class FiveCardDraw extends Poker{
     //primera modalidad de juego (subclase de Poker)
@@ -9,6 +10,25 @@ public class FiveCardDraw extends Poker{
         this.nJugadores = nJugadores;
         super(nJugadores);
         setTitle("Five Card Draw");
+
+
+        checkButton = new JButton();
+        checkButton.setIcon(new ImageIcon(new ImageIcon("images/botones/check.png").getImage().getScaledInstance(WIDTH_SIZE/12, HEIGHT_SIZE/15, Image.SCALE_SMOOTH)));
+        checkButton.setContentAreaFilled(false);
+        checkButton.setBorderPainted(false);
+        checkButton.setBounds((WIDTH_SIZE/6)*3-WIDTH_SIZE/24,((HEIGHT_SIZE/5)/2) - (HEIGHT_SIZE/45),WIDTH_SIZE/12, HEIGHT_SIZE/15);
+        checkButton.setDisabledIcon(new ImageIcon(new ImageIcon("images/botones/checkDisable.png").getImage().getScaledInstance(WIDTH_SIZE/12, HEIGHT_SIZE/15, Image.SCALE_SMOOTH)));
+
+        betButton = new JButton();
+        betButton.setIcon(new ImageIcon(new ImageIcon("images/botones/bet.png").getImage().getScaledInstance(WIDTH_SIZE/12, HEIGHT_SIZE/15, Image.SCALE_SMOOTH)));
+        betButton.setContentAreaFilled(false);
+        betButton.setBorderPainted(false);
+        betButton.setBounds((WIDTH_SIZE/6)-WIDTH_SIZE/24, ((HEIGHT_SIZE/5)/2) - (HEIGHT_SIZE/20) ,WIDTH_SIZE/12, HEIGHT_SIZE/15);
+        betButton.setDisabledIcon(new ImageIcon(new ImageIcon("images/botones/betDisable.png").getImage().getScaledInstance(WIDTH_SIZE/12, HEIGHT_SIZE/15, Image.SCALE_SMOOTH)));
+
+        labelBotones.add(betButton);
+        labelBotones.add(checkButton);
+
     }
     @Override
     protected void repartirCartas(){
