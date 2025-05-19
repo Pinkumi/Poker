@@ -40,14 +40,12 @@ public class Baraja {
     }
 
     // reparto de cartas para 7 card stud
-    public Carta extraerCarta(boolean visible){
-        Carta carta;
-        Random rand = new Random();
-        int indiceRand = rand.nextInt(cartas.size());
-        carta = cartas.get(indiceRand);
-        if (!visible) {
+    public Carta extraerCarta(boolean visible) {
+        Carta carta = cartas.removeFirst();
+        if (carta.esVisible() != visible) {
             carta.voltear();
         }
+
         return carta;
     }
 

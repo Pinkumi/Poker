@@ -27,6 +27,11 @@ public class Jugador {
     public Mano getMano(){
         return mano;
     }
+
+    public int getNJugador(){
+        return nJugador;
+    }
+
     public String toString()
     {
         return  "Jugador No."+nJugador +" - "+ numFichas;

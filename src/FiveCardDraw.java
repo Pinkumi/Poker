@@ -13,8 +13,8 @@ public class FiveCardDraw extends Poker{
 
 
     public FiveCardDraw(int nJugadores){
-        this.nJugadores = nJugadores;
         super(nJugadores);
+        this.nJugadores = nJugadores;
 
         cartaSize = 170;
         baraja.changeSizeCards(cartaSize);

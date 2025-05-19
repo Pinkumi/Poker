@@ -79,7 +79,7 @@ public class Carta extends JLabel {
             valorInfLabel.setVisible(true);
             esVisible=true;
         }
-        esVisible = !esVisible;
+//        esVisible = !esVisible;
     }
     public boolean esVisible(){
         return esVisible;
@@ -129,8 +129,9 @@ public class Carta extends JLabel {
         }
         return false;
     }
+    @Override
     public String toString(){
-        return valor + " | " + figura;
+        return valor + " | " + figura + " - " + esVisible;
     }
     public boolean tieneElMismoValor(Carta otraCarta) {
         return valor == otraCarta.valor;

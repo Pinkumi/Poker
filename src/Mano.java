@@ -7,11 +7,15 @@ public class Mano {
 
     public Mano(ArrayList<Carta> cartas) {
         this.cartas = cartas;
-        ordenarMano();
     }
     public ArrayList<Carta> getMano() {
         return cartas;
     }
+
+    public ArrayList<Carta> getCartas() {
+        return cartas;
+    }
+
     public Carta removerCartaPos(int pos){
         return cartas.remove(pos);
     }
@@ -45,6 +49,16 @@ public class Mano {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Carta carta : cartas) {
+            sb.append(carta.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
 
     public boolean hayCartasRepetidas(){
         HashMap<Integer, Integer> mano = new HashMap<>();
@@ -138,6 +152,21 @@ public class Mano {
         return valorMasAlto;
     }
 
+    public int obtenerRanking() {
+        ordenarMano();
+
+        if (RoyalFlush()) return 10;
+        if (StraightColor()) return 9;
+        if (FourOfAKind()) return 8;
+        if (FullHouse()) return 7;
+        if (Flush()) return 6;
+        if (Straight()) return 5;
+        if (ThreeOfAKind()) return 4;
+        if (TwoPairs()) return 3;
+        if (OnePair()) return 2;
+
+        return 1;
+    }
 
     //endregion
 
