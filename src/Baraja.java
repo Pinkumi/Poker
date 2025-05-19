@@ -31,7 +31,7 @@ public class Baraja {
     }
     public ArrayList<Carta> extraerCartas(int numCartas){
         ArrayList<Carta> cartasExtraidas = new ArrayList<>();
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<numCartas; i++) {
             Carta carta = cartas.removeFirst();
             cartasExtraidas.add(carta);
         }

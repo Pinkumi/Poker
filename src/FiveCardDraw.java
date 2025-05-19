@@ -11,7 +11,6 @@ public class FiveCardDraw extends Poker{
         super(nJugadores);
         setTitle("Five Card Draw");
 
-
         checkButton = new JButton();
         checkButton.setIcon(new ImageIcon(new ImageIcon("images/botones/check.png").getImage().getScaledInstance(WIDTH_SIZE/12, HEIGHT_SIZE/15, Image.SCALE_SMOOTH)));
         checkButton.setContentAreaFilled(false);
@@ -29,10 +28,32 @@ public class FiveCardDraw extends Poker{
         labelBotones.add(betButton);
         labelBotones.add(checkButton);
 
+
+
+        String entrada = JOptionPane.showInputDialog(null,"Ingrese la cantidad de fichas iniciales:", "Cantidad de Fichas", JOptionPane.QUESTION_MESSAGE);
+        if(entrada == null || entrada.isEmpty()){
+            JOptionPane.showMessageDialog(null, "No se ingreso nada, la cantidad de fichas iniciales es de 500.");
+        }else{
+            cantFichasIniciales = Integer.parseInt(entrada);
+        }
+
+
+        repartirCartas();
+
     }
     @Override
     protected void repartirCartas(){
-        System.out.println("Repartiendo cartas");
+        baraja.mezclarCartas();
+        for(int i = 0; i < nJugadores; i++){
+            jugadores.add(new Jugador(i,new Mano(baraja.extraerCartas(5))));
+            jugadores.get(i).agregarFichas(cantFichasIniciales);
+        }
     }
+    @Override
+    protected void dibujarTablero(){
+
+    }
+
+
 
 }
