@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Poker extends JFrame{
     // clase padre de juego poker
@@ -12,6 +13,9 @@ public abstract class Poker extends JFrame{
     protected JButton raiseButton;
     protected JLabel labelBotones;
     protected JLabel labelInfo;
+    protected ArrayList<Jugador> jugadores;
+    protected int cantFichasIniciales;
+    protected Baraja baraja;
 
     public Poker(int nJugadores){
 
@@ -21,10 +25,13 @@ public abstract class Poker extends JFrame{
         setSize(WIDTH_SIZE,HEIGHT_SIZE);
         setLocationRelativeTo(null);
 
+        jugadores = new ArrayList<>();
+        baraja = new Baraja();
+
         Image fondoImage = new ImageIcon("images/fondoPoker.jpg").getImage().getScaledInstance(WIDTH_SIZE,HEIGHT_SIZE,Image.SCALE_SMOOTH);
         JLabel fondoPokerLabel = new JLabel(new ImageIcon(fondoImage));
         fondoPokerLabel.setLayout(null);
-
+        cantFichasIniciales = 500;
         labelBotones = new JLabel();
         labelBotones.setLayout(null);
         labelBotones.setSize(WIDTH_SIZE,HEIGHT_SIZE/5);
@@ -72,6 +79,9 @@ public abstract class Poker extends JFrame{
         fondoPokerLabel.add(labelInfo);
 
 
+
     }
     protected abstract void repartirCartas();
+
 }
+
