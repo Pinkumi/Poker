@@ -43,7 +43,7 @@ public class Baraja {
     public Carta extraerCarta(boolean visible) {
         Carta carta = cartas.removeFirst();
         if (carta.esVisible() != visible) {
-            carta.voltear();
+            carta.voltear7();
         }
 
         return carta;

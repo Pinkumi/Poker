@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class SevenCardStud extends Poker{
@@ -36,7 +37,6 @@ public class SevenCardStud extends Poker{
 //        completeButton.setEnabled(false);
 //        raiseButton.setEnabled(false);
 //        callButton.setEnabled(false);
-
         anteMano(10);
         repartirCartas();
         cuartaStreet();
@@ -72,7 +72,7 @@ public class SevenCardStud extends Poker{
                 jugador.tomarCarta(baraja.extraerCarta(true));
             }
         }
-        rondaApuestas();
+        rondaApuestas(10);
     }
 
     public void quintaStreet() {
@@ -82,7 +82,7 @@ public class SevenCardStud extends Poker{
                 jugador.tomarCarta(baraja.extraerCarta(true));
             }
         }
-        rondaApuestas();
+        rondaApuestas(10);
     }
 
     public void sextaStreet() {
@@ -92,7 +92,7 @@ public class SevenCardStud extends Poker{
                 jugador.tomarCarta(baraja.extraerCarta(true));
             }
         }
-        rondaApuestas();
+        rondaApuestas(10);
     }
 
     public void septimaStreet() {
@@ -132,88 +132,93 @@ public class SevenCardStud extends Poker{
     }
 
 
-    public void rondaApuestas() {
+    public void rondaApuestas(int ante) {
+        int apuestaActual = ante;
+        HashMap<Jugador, Integer> apuestas = new HashMap<>();
 
         for (Jugador jugador : jugadores) {
-            if (jugadoresRetirados.contains(jugador) || jugador.getFichas() <= 0){
-                continue;
-            };
+            apuestas.put(jugador, 0);
+        }
 
-            String mensaje = jugador + "\n"
-                    + "Fichas disponibles: " + jugador.getFichas() + "\n"
-                    + "Apuesta actual: " + apuestaActual + "\nBote: " + bote;
+        for (Jugador jugador : jugadores) {
+            if (jugadoresRetirados.contains(jugador) || jugador.getFichas() <= 0) {
+            continue;
+            }
+
+            int yaApostado = apuestas.get(jugador);
+            int diferencia = apuestaActual - yaApostado;
 
             System.out.println("Cartas en mano:");
-            System.out.println(jugador.getMano().toString());
+            System.out.println(jugador.getMano());
 
-            System.out.println(mensaje);
-            String opciones = " 1. Igualar \n 2. Subir \n 3. Retirase";
-            System.out.println(opciones);
+            System.out.println("\n" + jugador);
+            System.out.println("Fichas disponibles: " + jugador.getFichas());
+            System.out.println("Apuesta actual: " + apuestaActual);
+            System.out.println("Tú has apostado: " + yaApostado);
+            System.out.println("1. Igualar (" + diferencia + ")");
+            System.out.println("2. Subir");
+            System.out.println("3. Retirarse");
+
             Scanner sc = new Scanner(System.in);
-            int opcion = sc.nextInt()-1;
+            int opcion = sc.nextInt();
 
             switch (opcion) {
-                case 0: // Igualar
-
-                    if (jugador.getFichas() >= apuestaActual) {
-                        bote += apuestaActual;
-
+                case 1: // Igualar
+                    if (jugador.getFichas() >= diferencia) {
+                        jugador.colocarFichas(diferencia);
+                        apuestas.put(jugador, yaApostado + diferencia);
+                        bote += diferencia;
                     } else {
-                        System.out.println("No puedes igualar");
+                        System.out.println("No puedes igualar. Te retiras");
                         jugadoresRetirados.add(jugador);
-
                     }
                     break;
 
-                case 1: // Subir
-                    Scanner scn2 = new Scanner(System.in);
-                    System.out.println("Cuánto deseas subir: ");
-                    String entrada = scn2.nextLine();
+                case 2: // Subir
+                    System.out.print("Cuánto deseas subir: ");
+                    int subida = sc.nextInt();
+                    int nuevaApuesta = apuestaActual + subida;
+                    int total = nuevaApuesta - yaApostado;
 
-                    if (entrada != null && !entrada.isEmpty()) {
-
-                        int subida = Integer.parseInt(entrada);
-                        int total = apuestaActual + subida;
-
-                        if (jugador.getFichas() >= total) {
-                            apuestaActual = total;
-                            jugador.colocarFichas(total);
-                            bote += total;
-
-                        } else {
-                            System.out.println("No tienes suficientes fichas");
-                            jugadoresRetirados.add(jugador);
-                        }
+                    if (jugador.getFichas() >= total) {
+                        jugador.colocarFichas(total);
+                        apuestas.put(jugador, nuevaApuesta);
+                        apuestaActual = nuevaApuesta;
+                        bote += total;
+                    } else {
+                        System.out.println("No tienes suficientes fichas. Te retiras");
+                        jugadoresRetirados.add(jugador);
                     }
                     break;
 
-                case 2: // Retirarse
+                case 3: // Retirarse
                 default:
                     jugadoresRetirados.add(jugador);
-                    System.out.println(jugador + " retirado");
+                    System.out.println(jugador + " se ha retirado.");
                     break;
             }
         }
 
-        System.out.println("Pozo acumulado: " + bote + " fichas");
+        System.out.println("\nBote total: " + bote + " fichas.");
     }
+
 
     public void anteMano(int ante){
         System.out.println("Ante Mano de apuestas: ");
-        bote = ante;
+        bote = 0;
 
-        for(Jugador jugador : jugadores){
-            if(jugador.getFichas() >= ante){
+        for (Jugador jugador : jugadores) {
+            if (jugador.getFichas() >= ante) {
                 jugador.colocarFichas(ante);
                 bote += ante;
                 System.out.println(jugador + " coloca " + ante);
-
-            }else{
-                System.out.println(jugador + "sin fichas necesarias");
+            } else {
+                System.out.println(jugador + " sin fichas suficientes. Se retira.");
+                jugadoresRetirados.add(jugador);
             }
         }
-        System.out.println("Pozo inicial: " + bote + " fichas");
 
+        System.out.println("Bote inicial: " + bote + " fichas");
     }
 
 

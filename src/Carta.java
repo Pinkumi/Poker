@@ -79,8 +79,26 @@ public class Carta extends JLabel {
             valorInfLabel.setVisible(true);
             esVisible=true;
         }
-//        esVisible = !esVisible;
+        esVisible = !esVisible;
     }
+
+    public void voltear7() {
+        if(esVisible){
+            setEnabled(false);
+            image.setVisible(false);
+            valorSupLabel.setVisible(false);
+            valorInfLabel.setVisible(false);
+            esVisible=true;
+        }else{
+            setEnabled(true);
+            image.setVisible(true);
+            valorSupLabel.setVisible(true);
+            valorInfLabel.setVisible(true);
+            esVisible=false;
+        }
+        esVisible = !esVisible;
+    }
+
     public boolean esVisible(){
         return esVisible;
     }
