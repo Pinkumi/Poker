@@ -33,5 +33,9 @@ public class SevenCardStud extends Poker{
     protected void repartirCartas() {
 
     }
+    @Override
+    protected void dibujarTablero() {
+
+    }
 
 }

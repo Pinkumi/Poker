@@ -79,9 +79,8 @@ public abstract class Poker extends JFrame{
         fondoPokerLabel.add(labelInfo);
 
 
-
     }
     protected abstract void repartirCartas();
-
+    protected abstract void dibujarTablero();
 }
 

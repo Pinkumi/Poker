@@ -48,7 +48,12 @@ public class FiveCardDraw extends Poker{
             jugadores.add(new Jugador(i,new Mano(baraja.extraerCartas(5))));
             jugadores.get(i).agregarFichas(cantFichasIniciales);
         }
+    }
+    @Override
+    protected void dibujarTablero(){
 
     }
+
+
 
 }
