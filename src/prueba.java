@@ -19,9 +19,9 @@ public class prueba {
                 Carta carta = baraja.getCartas().get(cartaPos);
                 carta.setLocation(x, y);
                 frame.add(carta);
-//                if(carta.getValor()%2==1){
-//                    carta.voltear();
-//                }
+                if(carta.getValor()%2==1){
+                    carta.voltear();
+                }
                 x += carta.getWidth()+5;
                 cartaPos++;
             }

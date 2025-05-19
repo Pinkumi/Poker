@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Baraja {
     private ArrayList<Carta> cartas;
@@ -37,6 +38,19 @@ public class Baraja {
         }
         return cartasExtraidas;
     }
+
+    // reparto de cartas para 7 card stud
+    public Carta extraerCarta(boolean visible){
+        Carta carta;
+        Random rand = new Random();
+        int indiceRand = rand.nextInt(cartas.size());
+        carta = cartas.get(indiceRand);
+        if (!visible) {
+            carta.voltear();
+        }
+        return carta;
+    }
+
     public int getNumCartas(){
         return cartas.size();
     }

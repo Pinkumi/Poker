@@ -5,19 +5,24 @@ public class Jugador {
     private int numFichas;
     public Mano mano;
     private int nJugador;
+
     Jugador(int nJugador, Mano mano) {
         this.nJugador = nJugador;
         this.mano = mano;
-        numFichas = 0;
+        numFichas = 10;
 
     }
     public void agregarFichas(int numFichas)
     {
         this.numFichas += numFichas;
     }
+    public void colocarFichas(int numFichas) {this.numFichas -= numFichas;}
     public int getFichas()
     {
         return numFichas;
+    }
+    public void tomarCarta(Carta carta){
+        mano.agregarCarta(carta);
     }
     public Mano getMano(){
         return mano;
