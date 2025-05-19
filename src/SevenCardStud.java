@@ -6,8 +6,10 @@ public class SevenCardStud extends Poker{
     private int nJugadores;
     private JButton completeButton;
     public SevenCardStud(int nJugadores){
-        this.nJugadores = nJugadores;
+
         super(nJugadores);
+        this.nJugadores = nJugadores;
+
         setTitle("Seven Card Stud");
         completeButton = new JButton();
         completeButton.setIcon(new ImageIcon(new ImageIcon("images/botones/complete.png").getImage().getScaledInstance(WIDTH_SIZE/10, HEIGHT_SIZE/15, Image.SCALE_SMOOTH)));

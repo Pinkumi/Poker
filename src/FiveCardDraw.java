@@ -7,8 +7,9 @@ public class FiveCardDraw extends Poker{
     private JButton checkButton;
     private JButton betButton;
     public FiveCardDraw(int nJugadores){
-        this.nJugadores = nJugadores;
+        // cambio de posicion de this.
         super(nJugadores);
+        this.nJugadores = nJugadores;
         setTitle("Five Card Draw");
 
 
