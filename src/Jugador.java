@@ -9,7 +9,7 @@ public class Jugador {
     Jugador(int nJugador, Mano mano) {
         this.nJugador = nJugador;
         this.mano = mano;
-        numFichas = 10;
+        numFichas = 0;
 
     }
     public void agregarFichas(int numFichas)

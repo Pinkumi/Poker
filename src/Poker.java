@@ -17,6 +17,8 @@ public abstract class Poker extends JFrame{
     protected int cantFichasIniciales;
     protected Baraja baraja;
     protected int turnoJugador;
+    protected int bote;
+    protected int nRonda;
 
     public Poker(int nJugadores){
 
@@ -27,7 +29,8 @@ public abstract class Poker extends JFrame{
         setLocationRelativeTo(null);
         turnoJugador = 0;
         jugadores = new ArrayList<>();
-        baraja = new Baraja();
+
+
 
         Image fondoImage = new ImageIcon("images/fondoPoker.jpg").getImage().getScaledInstance(WIDTH_SIZE,HEIGHT_SIZE,Image.SCALE_SMOOTH);
         JLabel fondoPokerLabel = new JLabel(new ImageIcon(fondoImage));
@@ -71,13 +74,33 @@ public abstract class Poker extends JFrame{
         labelInfo.setVisible(true);
         labelInfo.setIcon(new ImageIcon(new ImageIcon("images/tableroInfo.png").getImage().getScaledInstance(WIDTH_SIZE, HEIGHT_SIZE/9, Image.SCALE_SMOOTH)));
 
+        JLabel tituloJugador = new JLabel(new ImageIcon(new ImageIcon("images/texto/jugador.png").getImage().getScaledInstance(WIDTH_SIZE/7,HEIGHT_SIZE/20, Image.SCALE_SMOOTH)));
+        tituloJugador.setLayout(null);
+        tituloJugador.setSize(WIDTH_SIZE/7,HEIGHT_SIZE/20);
+        tituloJugador.setLocation(WIDTH_SIZE - (15*WIDTH_SIZE/16),(HEIGHT_SIZE/18)- tituloJugador.getHeight()/2);
+        labelInfo.add(tituloJugador);
 
+        JLabel tituloBote = new JLabel(new ImageIcon(new ImageIcon("images/texto/bote.png").getImage().getScaledInstance(WIDTH_SIZE/12,HEIGHT_SIZE/20, Image.SCALE_SMOOTH)));
+        tituloBote.setLayout(null);
+        tituloBote.setSize(WIDTH_SIZE/12, HEIGHT_SIZE/20);
+        tituloBote.setLocation(WIDTH_SIZE - (10*WIDTH_SIZE/16),(HEIGHT_SIZE/18)- tituloBote.getHeight()/2);
+        labelInfo.add(tituloBote);
+
+        JLabel tituloFichas = new JLabel(new ImageIcon(new ImageIcon("images/texto/fichas.png").getImage().getScaledInstance(WIDTH_SIZE/9,HEIGHT_SIZE/20, Image.SCALE_SMOOTH)));
+        tituloFichas.setLayout(null);
+        tituloFichas.setSize(WIDTH_SIZE/9, HEIGHT_SIZE/20);
+        tituloFichas.setLocation(WIDTH_SIZE - (5*WIDTH_SIZE/16),(HEIGHT_SIZE/18)- tituloFichas.getHeight()/2);
+        labelInfo.add(tituloFichas);
+
+
+        baraja = new Baraja();
         ImageIcon logo = new ImageIcon("images/logo.png");
         setIconImage(logo.getImage());
         setContentPane(fondoPokerLabel);
         setVisible(true);
         fondoPokerLabel.add(labelBotones);
         fondoPokerLabel.add(labelInfo);
+
 
 
     }

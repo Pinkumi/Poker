@@ -11,6 +11,7 @@ public class FiveCardDraw extends Poker{
     private ImageIcon image5CardsHorizontal;
     private int cartaSize;
 
+
     public FiveCardDraw(int nJugadores){
         this.nJugadores = nJugadores;
         super(nJugadores);
@@ -48,7 +49,7 @@ public class FiveCardDraw extends Poker{
             cantFichasIniciales = Integer.parseInt(entrada);
         }
 
-
+        baraja.changeSizeCards(cartaSize);
         repartirCartas();
         dibujarTablero();
 
@@ -63,6 +64,21 @@ public class FiveCardDraw extends Poker{
     }
     @Override
     protected void dibujarTablero(){
+
+        JLabel jugadorEnTurnoLabel = new JLabel(String.valueOf(turnoJugador+1));
+        jugadorEnTurnoLabel.setFont(new Font("Arial",Font.PLAIN,60));
+        jugadorEnTurnoLabel.setLayout(null);
+        jugadorEnTurnoLabel.setForeground(Color.orange);
+        jugadorEnTurnoLabel.setBounds(WIDTH_SIZE - (15*WIDTH_SIZE/16) + WIDTH_SIZE/7,(HEIGHT_SIZE/18)- (HEIGHT_SIZE/20)/2,WIDTH_SIZE/7,HEIGHT_SIZE/20);
+        labelInfo.add(jugadorEnTurnoLabel);
+
+        JLabel fichasJugadorTurnoLabel = new JLabel(String.valueOf(jugadores.get(turnoJugador).getFichas()) + " $");
+        fichasJugadorTurnoLabel.setFont(new Font("Arial",Font.PLAIN,60));
+        fichasJugadorTurnoLabel.setLayout(null);
+        fichasJugadorTurnoLabel.setForeground(Color.orange);
+        fichasJugadorTurnoLabel.setBounds(WIDTH_SIZE - (5*WIDTH_SIZE/16) + WIDTH_SIZE/9,(HEIGHT_SIZE/18)- (HEIGHT_SIZE/20)/2,WIDTH_SIZE/5,HEIGHT_SIZE/20);
+        labelInfo.add(fichasJugadorTurnoLabel);
+
         switch(nJugadores){
             case 2,4:
                 //Dibujar 1 arriba
