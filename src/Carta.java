@@ -41,7 +41,7 @@ public class Carta extends JLabel {
         }else{
             image.setBounds((width - (width-(width/2)))/2, (height - (height-(height/2)))/2, width-(width/2), height-(height/2));
         }
-        Image img = new ImageIcon("images/carta_trasera.png").getImage().getScaledInstance(width,height, Image.SCALE_SMOOTH);
+        Image img = new ImageIcon("images/carta_trasera.png").getImage().getScaledInstance(width-3,height, Image.SCALE_SMOOTH);
         setDisabledIcon(new ImageIcon(img));
         String figuraEmoji = switch (figura) {
             case "corazon" -> "♥";
@@ -128,6 +128,9 @@ public class Carta extends JLabel {
             return figura.equals(otraCarta.figura);
         }
         return false;
+    }
+    public String toString(){
+        return valor + " | " + figura;
     }
     public boolean tieneElMismoValor(Carta otraCarta) {
         return valor == otraCarta.valor;
