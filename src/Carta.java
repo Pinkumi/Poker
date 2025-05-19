@@ -25,7 +25,6 @@ public class Carta extends JLabel {
         image = new JLabel();
         valorSupLabel = new JLabel(); valorInfLabel = new JLabel();
 
-
         setOpaque(true);
         setBackground(Color.WHITE);
         setBounds(xPos, yPos, width, height);
@@ -64,6 +63,7 @@ public class Carta extends JLabel {
         valorInfLabel.setFont(new Font("Times New Roman", Font.PLAIN, (width/6)+2));
         valorSupLabel.setBounds(((width/7))/2,0, (width+20 - (width-(width/2)))/2, (height - (height-(height/3)))/2);
         valorInfLabel.setBounds(width - (((width/6)+2)/2+(width - (width-(width/2)))/2), height -((height - (height-(height/3)))/2) , (width+20 - (width-(width/2)))/2, (height - (height-(height/3)))/2);
+
     }
     public void voltear() {
         if(esVisible){
@@ -71,17 +71,21 @@ public class Carta extends JLabel {
             image.setVisible(false);
             valorSupLabel.setVisible(false);
             valorInfLabel.setVisible(false);
+            esVisible=false;
         }else{
             setEnabled(true);
             image.setVisible(true);
             valorSupLabel.setVisible(true);
             valorInfLabel.setVisible(true);
+            esVisible=true;
         }
         esVisible = !esVisible;
     }
     public boolean esVisible(){
         return esVisible;
     }
+
+
     private ImageIcon encontrarIcon() {
         String directorio = "";
         String figuraReal = switch (valor) {

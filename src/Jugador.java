@@ -5,6 +5,7 @@ public class Jugador {
     private int numFichas;
     public Mano mano;
     private int nJugador;
+
     Jugador(int nJugador, Mano mano) {
         this.nJugador = nJugador;
         this.mano = mano;
@@ -15,6 +16,7 @@ public class Jugador {
     {
         this.numFichas += numFichas;
     }
+    public void colocarFichas(int numFichas) {this.numFichas -= numFichas;}
     public int getFichas()
     {
         return numFichas;

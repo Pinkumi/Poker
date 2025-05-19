@@ -1,13 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SevenCardStud extends Poker{
     //segunda modalidad de juego (subclase de Poker)
     private int nJugadores;
     private JButton completeButton;
     public SevenCardStud(int nJugadores){
+
         super(nJugadores);
         this.nJugadores = nJugadores;
+
         setTitle("Seven Card Stud");
         completeButton = new JButton();
         completeButton.setIcon(new ImageIcon(new ImageIcon("images/botones/complete.png").getImage().getScaledInstance(WIDTH_SIZE/10, HEIGHT_SIZE/15, Image.SCALE_SMOOTH)));
@@ -27,12 +30,26 @@ public class SevenCardStud extends Poker{
 //        completeButton.setEnabled(false);
 //        raiseButton.setEnabled(false);
 //        callButton.setEnabled(false);
+        repartirCartas();
     }
 
     @Override
     protected void repartirCartas() {
+        baraja.mezclarCartas();
+
+        for(int i = 0; i < nJugadores; i++){
+            ArrayList<Carta> cartasJugador = new ArrayList<>();
+            cartasJugador.add(baraja.extraerCarta(false));
+            cartasJugador.add(baraja.extraerCarta(false));
+            cartasJugador.add(baraja.extraerCarta(true));
+
+            Mano manoJugador = new Mano(cartasJugador);
+            Jugador jugador = new Jugador(i, manoJugador);
+        }
 
     }
+
+
     @Override
     protected void dibujarTablero() {
 
