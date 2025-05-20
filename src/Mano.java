@@ -19,8 +19,23 @@ public class Mano {
     public Carta removerCartaPos(int pos){
         return cartas.remove(pos);
     }
+    public void removerCarta(Carta cartaARemover){
+        cartas.remove(cartaARemover);
+    }
     public void agregarCarta( Carta carta){
         cartas.add(carta);
+    }
+    public void ocultarCartas(){
+        for (Carta carta : cartas) {
+            carta.setVisible(false);
+        }
+    }
+    public void mostrarCartas(){
+        for (Carta carta : cartas) {
+            if (!carta.isVisible()) {
+                carta.setVisible(true);
+            }
+        }
     }
 
     public void ordenarMano(){
@@ -37,6 +52,16 @@ public class Mano {
             }
         }
         return contador;
+    }
+    public void deshabilitarBotones(){
+        for(Carta carta: cartas){
+            carta.getCardBtn().setEnabled(false);
+        }
+    }
+    public void habilitarBotones(){
+        for(Carta carta: cartas){
+            carta.getCardBtn().setEnabled(true);
+        }
     }
 
     public boolean mismoPalo(){

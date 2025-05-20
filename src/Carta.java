@@ -9,7 +9,7 @@ public class Carta extends JLabel {
     private int height;
     private int xPos;
     private int yPos;
-    private JLabel image;
+    private JButton image;
     private JLabel valorSupLabel;
     private JLabel valorInfLabel;
     private boolean esVisible;
@@ -22,7 +22,9 @@ public class Carta extends JLabel {
         this.xPos = 0;
         this.yPos = 0;
         this.esVisible=true;
-        image = new JLabel();
+        image = new JButton();
+        image.setContentAreaFilled(false);
+        image.setBorderPainted(false);
         valorSupLabel = new JLabel(); valorInfLabel = new JLabel();
 
         setOpaque(true);
@@ -36,6 +38,7 @@ public class Carta extends JLabel {
     }
     private void definirIcon() {
         image.setIcon(encontrarIcon());
+        image.setDisabledIcon(encontrarIcon());
         if (valor >= 11 && valor <= 13) {
             image.setBounds((width - (width-(width/2)))/2, (height - (height-(height/3)))/2, width-(width/2), height-(height/3));
         }else{
@@ -150,6 +153,9 @@ public class Carta extends JLabel {
     @Override
     public String toString(){
         return valor + " | " + figura + " - " + esVisible;
+    }
+    public JButton getCardBtn() {
+        return image;
     }
     public boolean tieneElMismoValor(Carta otraCarta) {
         return valor == otraCarta.valor;

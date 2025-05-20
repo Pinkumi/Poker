@@ -19,8 +19,11 @@ public class prueba {
                 Carta carta = baraja.getCartas().get(cartaPos);
                 carta.setLocation(x, y);
                 frame.add(carta);
+                carta.getCardBtn().addActionListener(e -> System.out.println("Se presiono esta carta"));
+
                 if(carta.getValor()%2==1){
                     carta.voltear();
+                    //carta.getCardBtn().setEnabled(false);
                 }
                 x += carta.getWidth()+5;
                 cartaPos++;
