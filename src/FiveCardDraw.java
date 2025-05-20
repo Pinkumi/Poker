@@ -10,15 +10,27 @@ public class FiveCardDraw extends Poker{
     private ImageIcon image5CardsVertical;
     private ImageIcon image5CardsHorizontal;
     private int cartaSize;
+    private int jugadoresRestantes;
+    private JLabel jugadorEnTurnoLabel;
+    private JLabel fichasJugadorTurnoLabel;
+    private JLabel boteLabel;
 
 
     public FiveCardDraw(int nJugadores){
         super(nJugadores);
         this.nJugadores = nJugadores;
 
-        cartaSize = 170;
+        jugadoresRestantes = nJugadores;
+        apuestaActual = 0;
+        nRonda = 0;
+        bote =0;
+        cartaSize = 8*HEIGHT_SIZE/50;
         baraja.changeSizeCards(cartaSize);
         setTitle("Five Card Draw");
+
+        jugadorEnTurnoLabel = new JLabel();
+        fichasJugadorTurnoLabel = new JLabel();
+        boteLabel = new JLabel();
 
         image5CardsHorizontal = new ImageIcon(new ImageIcon("images/mano5cardsH.png").getImage().getScaledInstance(161*((cartaSize*2)/3)/100, cartaSize, Image.SCALE_SMOOTH));
         image5CardsVertical = new ImageIcon(new ImageIcon("images/mano5cardsV.png").getImage().getScaledInstance(cartaSize, 161*((cartaSize*2)/3)/100, Image.SCALE_SMOOTH));
@@ -50,8 +62,9 @@ public class FiveCardDraw extends Poker{
         }
 
         baraja.changeSizeCards(cartaSize);
+        agregarEfectoBotones();
         repartirCartas();
-        dibujarTablero();
+        dibujarTablero(nJugadores);
 
     }
     @Override
@@ -62,24 +75,97 @@ public class FiveCardDraw extends Poker{
             jugadores.get(i).agregarFichas(cantFichasIniciales);
         }
     }
-    @Override
-    protected void dibujarTablero(){
+    public void agregarEfectoBotones(){
+        foldButton.addActionListener(e->{
+            //Abandonar apuesta y mano.
+            System.out.println("Se abandonara la mano.");
 
-        JLabel jugadorEnTurnoLabel = new JLabel(String.valueOf(turnoJugador+1));
-        jugadorEnTurnoLabel.setFont(new Font("Arial",Font.PLAIN,60));
+        });
+        callButton.addActionListener( e->{
+            //Igualar la apuesta actual.
+            System.out.println("Se Igualara la apuesta.");
+            jugadores.get(turnoJugador).colocarFichas(apuestaActual);
+            bote += apuestaActual;
+            dibujarTablero(jugadoresRestantes);
+        });
+        raiseButton.addActionListener( e->{
+            //Aumenta la apuesta actual.
+            System.out.println("Se aumentar la apuesta.");
+            String fichasRaise = JOptionPane.showInputDialog(null,"Ingrese la cantidad de fichas a aumentar:", "Aumentar", JOptionPane.QUESTION_MESSAGE);
+            if(fichasRaise == null || fichasRaise.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No se ingreso nada, la apuesta se incrementara en 100$.");
+                apuestaActual += 100;
+                jugadores.get(turnoJugador).colocarFichas(apuestaActual);
+            }else if(Integer.parseInt(fichasRaise) <= apuestaActual){
+                JOptionPane.showMessageDialog(null, "Tienes que aumentar mas a la apuesta actual, se incrementara en 100$.");
+                apuestaActual += 100;
+                jugadores.get(turnoJugador).colocarFichas(apuestaActual);
+            }else{
+                apuestaActual = Integer.parseInt(fichasRaise);
+                jugadores.get(turnoJugador).colocarFichas(apuestaActual);
+            }
+            bote += apuestaActual;
+            dibujarTablero(jugadoresRestantes);
+
+        });
+        betButton.addActionListener( e->{
+            //Apostar
+            System.out.println("Se Apostara.");
+            String fichasApuesta = JOptionPane.showInputDialog(null,"Ingrese la cantidad de fichas a apostar:", "Apuesta", JOptionPane.QUESTION_MESSAGE);
+            if(fichasApuesta == null || fichasApuesta.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No se ingreso nada, la apuesta sera de 100$.");
+                bote = 100;
+            }else{
+                bote = Integer.parseInt(fichasApuesta);
+            }
+            apuestaActual = bote;
+            jugadores.get(turnoJugador).colocarFichas(apuestaActual);
+            dibujarTablero(jugadoresRestantes);
+
+
+        });
+        checkButton.addActionListener( e->{
+            //Pasar (solo si no hay apuesta actual)
+
+        });
+    }
+    public void actualizarInfo(){
+        jugadorEnTurnoLabel.revalidate();
+        jugadorEnTurnoLabel.repaint();
+        fichasJugadorTurnoLabel.revalidate();
+        fichasJugadorTurnoLabel.repaint();
+        boteLabel.revalidate();
+        boteLabel.repaint();
+        labelInfo.revalidate();
+        labelInfo.repaint();
+    }
+    protected void agregarFichasAlBote(int numFichas){
+        bote += numFichas;
+    }
+    @Override
+    protected void dibujarTablero(int jugadoresEnJuego){
+        jugadorEnTurnoLabel.setText(String.valueOf(turnoJugador+1));
+        jugadorEnTurnoLabel.setFont(new Font("Arial",Font.PLAIN,(HEIGHT_SIZE/22)+15));
         jugadorEnTurnoLabel.setLayout(null);
         jugadorEnTurnoLabel.setForeground(Color.orange);
         jugadorEnTurnoLabel.setBounds(WIDTH_SIZE - (15*WIDTH_SIZE/16) + WIDTH_SIZE/7,(HEIGHT_SIZE/18)- (HEIGHT_SIZE/20)/2,WIDTH_SIZE/7,HEIGHT_SIZE/20);
         labelInfo.add(jugadorEnTurnoLabel);
 
-        JLabel fichasJugadorTurnoLabel = new JLabel(String.valueOf(jugadores.get(turnoJugador).getFichas()) + " $");
-        fichasJugadorTurnoLabel.setFont(new Font("Arial",Font.PLAIN,60));
+        fichasJugadorTurnoLabel.setText(String.valueOf(jugadores.get(turnoJugador).getFichas()) + " $");
+        fichasJugadorTurnoLabel.setFont(new Font("Arial",Font.PLAIN,(HEIGHT_SIZE/22)+15));
         fichasJugadorTurnoLabel.setLayout(null);
         fichasJugadorTurnoLabel.setForeground(Color.orange);
         fichasJugadorTurnoLabel.setBounds(WIDTH_SIZE - (5*WIDTH_SIZE/16) + WIDTH_SIZE/9,(HEIGHT_SIZE/18)- (HEIGHT_SIZE/20)/2,WIDTH_SIZE/5,HEIGHT_SIZE/20);
         labelInfo.add(fichasJugadorTurnoLabel);
 
-        switch(nJugadores){
+        boteLabel.setText(String.valueOf(bote) + " $");
+        boteLabel.setFont(new Font("Arial",Font.PLAIN,(HEIGHT_SIZE/22)+15));
+        boteLabel.setLayout(null);
+        boteLabel.setForeground(Color.orange);
+        boteLabel.setBounds(WIDTH_SIZE - (10*WIDTH_SIZE/16) + WIDTH_SIZE/12,(HEIGHT_SIZE/18)- (HEIGHT_SIZE/20)/2,WIDTH_SIZE/5,HEIGHT_SIZE/20);
+        labelInfo.add(boteLabel);
+
+        switch(jugadoresEnJuego){
             case 2,4:
                 //Dibujar 1 arriba
                 JLabel cartas1 = new JLabel(image5CardsVertical);
@@ -125,7 +211,7 @@ public class FiveCardDraw extends Poker{
                 break;
 
         }
-        if(nJugadores > 3 && nJugadores < 8){
+        if(jugadoresEnJuego > 3 && jugadoresEnJuego < 8){
             //Dibujar 1 en cada lado
             JLabel cartas11 = new JLabel(image5CardsHorizontal);
             JLabel cartas12 = new JLabel(image5CardsHorizontal);
@@ -135,8 +221,10 @@ public class FiveCardDraw extends Poker{
             add(cartas12);
         }
         dibujarManoEnTurno();
+        actualizarInfo();
         revalidate();
         repaint();
+
 
     }
     private void dibujarManoEnTurno(){
@@ -147,7 +235,6 @@ public class FiveCardDraw extends Poker{
             Carta carta = cartasJugador.get(i-3);
             carta.setLocation(i*WIDTH_SIZE/10 - carta.getWidth()/2, y);
             add(carta);
-//            System.out.println(cartasJugador.get(i-2).toString());
         }
     }
 

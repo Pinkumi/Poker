@@ -223,7 +223,7 @@ public class SevenCardStud extends Poker{
 
 
     @Override
-    protected void dibujarTablero() {
+    protected void dibujarTablero(int JugadoresEnJuego) {
 
     }
 

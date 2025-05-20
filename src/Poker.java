@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public abstract class Poker extends JFrame{
     // clase padre de juego poker
-    protected final int WIDTH_SIZE = 1900;
-    protected final int HEIGHT_SIZE = 1060;
+    protected final int WIDTH_SIZE = 1366;
+    protected final int HEIGHT_SIZE = 768;
 
     protected int nJugadores;
     protected JButton foldButton;
@@ -19,6 +19,7 @@ public abstract class Poker extends JFrame{
     protected int turnoJugador;
     protected int bote;
     protected int nRonda;
+    protected int apuestaActual;
 
     public Poker(int nJugadores){
 
@@ -105,6 +106,6 @@ public abstract class Poker extends JFrame{
 
     }
     protected abstract void repartirCartas();
-    protected abstract void dibujarTablero();
+    protected abstract void dibujarTablero(int JugadoresEnJuego);
 }
 
