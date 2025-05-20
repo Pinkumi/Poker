@@ -104,7 +104,7 @@ public class SevenCardStud extends Poker{
             }
         }
         Jugador ganador = null;
-        int mejorPuntaje = -1;
+        int mejorPuntaje = - 1;
 
         for (Jugador jugador : jugadores) {
             if (jugadoresRetirados.contains(jugador)) continue;
@@ -136,13 +136,25 @@ public class SevenCardStud extends Poker{
         int apuestaActual = ante;
         HashMap<Jugador, Integer> apuestas = new HashMap<>();
 
+
         for (Jugador jugador : jugadores) {
-            apuestas.put(jugador, 0);
+            apuestas.put(jugador, ante);
         }
 
         for (Jugador jugador : jugadores) {
             if (jugadoresRetirados.contains(jugador) || jugador.getFichas() <= 0) {
             continue;
+            }
+
+            ArrayList<Integer> cartasVisiblesTemporal = new ArrayList<>();
+            ArrayList<Carta> cartasJugador = jugador.getMano().getCartas();
+
+            for (int i = 0; i < cartasJugador.size(); i++) {
+                Carta cartasOcultas = cartasJugador.get(i);
+                if (!cartasOcultas.esVisible()) {
+                    cartasOcultas.voltear7();
+                    cartasVisiblesTemporal.add(i);
+                }
             }
 
             int yaApostado = apuestas.get(jugador);
@@ -197,6 +209,10 @@ public class SevenCardStud extends Poker{
                     System.out.println(jugador + " se ha retirado.");
                     break;
             }
+            for (int j : cartasVisiblesTemporal) {
+                cartasJugador.get(j).voltear7();
+            }
+
         }
 
         System.out.println("\nBote total: " + bote + " fichas.");
