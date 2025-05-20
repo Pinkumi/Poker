@@ -25,7 +25,7 @@ public class FiveCardDraw extends Poker{
         apuestaActual = 0;
         nRonda = 1;
         bote =0;
-        cartaSize = 8*HEIGHT_SIZE/50;
+        cartaSize = 9*HEIGHT_SIZE/50;
         baraja.changeSizeCards(cartaSize);
         setTitle("Five Card Draw");
         jugadoresRetirados = new ArrayList<>();
@@ -99,6 +99,15 @@ public class FiveCardDraw extends Poker{
             jugadores.get(i).agregarFichas(cantFichasIniciales);
         }
     }
+    public void actualizarPantalla(){
+        getContentPane().removeAll();
+        add(labelBotones);
+        add(labelInfo);
+        repaint();
+        revalidate();
+
+        dibujarTablero(jugadoresRestantes);
+    }
     public void agregarEfectoBotones(){
         foldButton.addActionListener(e->{
             //Abandonar apuesta y mano.
@@ -106,20 +115,29 @@ public class FiveCardDraw extends Poker{
             jugadoresRestantes--;
             jugadoresRetirados.add(jugadores.remove(turnoJugador));
 
-            if (turnoJugador == jugadores.size() - 1) {
-                turnoJugador = 0;
-                System.out.println("SE ACABO LA BETTING ROUND");
-                //Activar botones dependiendo de la siguiente ronda
-                nRonda++;
-                if(nRonda == 4){
-                    showDown();
-                }else{
-                    pasarDeRonda();
+            //dibujarTablero(jugadoresRestantes);
+
+
+            Timer sleepTurno = new Timer(2000, a -> {
+                if (turnoJugador == jugadores.size() - 1) {
+                    turnoJugador = 0;
+                    System.out.println("SE ACABO LA BETTING ROUND");
+
+                    //Activar botones dependiendo de la siguiente ronda
+                    nRonda++;
+                    if(nRonda == 4){
+                        showDown();
+                    }else{
+                        pasarDeRonda();
+                    }
+                } else {
+                    actualizarPantalla();
+                    activarBotonesRondaApuestas();
                 }
-            } else {
-                turnoJugador++;
-                activarBotonesRondaApuestas();
-            }
+                dibujarTablero(jugadoresRestantes);
+            });
+            sleepTurno.setRepeats(false);
+            sleepTurno.start();
 
         });
         callButton.addActionListener( e->{
@@ -278,15 +296,15 @@ public class FiveCardDraw extends Poker{
     public void mostrarApuestasIcon(){
         JPanel panelApuestasRonda = new JPanel();
         panelApuestasRonda.setLayout(null);
-        panelApuestasRonda.setOpaque(true);
+        panelApuestasRonda.setOpaque(false);
         panelApuestasRonda.setBackground(new Color(255,215,0,50));
         panelApuestasRonda.setBounds(WIDTH_SIZE/2 - (WIDTH_SIZE/6), HEIGHT_SIZE/5, WIDTH_SIZE/3, HEIGHT_SIZE/4);
 
         Image imgApuestas = new ImageIcon("images/texto/apuestas.png")
-                .getImage().getScaledInstance(WIDTH_SIZE/3, HEIGHT_SIZE/7, Image.SCALE_SMOOTH);
+                .getImage().getScaledInstance(WIDTH_SIZE/2, HEIGHT_SIZE/5, Image.SCALE_SMOOTH);
         JLabel labelApuestas = new JLabel(new ImageIcon(imgApuestas));
         labelApuestas.setOpaque(false);
-        labelApuestas.setBounds(WIDTH_SIZE/2 - (WIDTH_SIZE/6),HEIGHT_SIZE/5, WIDTH_SIZE/3, HEIGHT_SIZE/7);
+        labelApuestas.setBounds(WIDTH_SIZE/2 - (WIDTH_SIZE/4),HEIGHT_SIZE/4, WIDTH_SIZE/2, HEIGHT_SIZE/5);
         panelApuestasRonda.add(labelApuestas);
         JRootPane root = getRootPane();
         root.setGlassPane(panelApuestasRonda);
