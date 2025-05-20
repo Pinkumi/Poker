@@ -29,7 +29,6 @@ public abstract class Poker extends JFrame{
         setSize(WIDTH_SIZE,HEIGHT_SIZE);
         setLocationRelativeTo(null);
         setResizable(false);
-        turnoJugador = 0;
         jugadores = new ArrayList<>();
 
 

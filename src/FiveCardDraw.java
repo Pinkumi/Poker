@@ -429,9 +429,9 @@ public class FiveCardDraw extends Poker{
 
     private void dibujarManos(){
         for(Jugador jugador : jugadores){
-           // Mano manoEnTurno = jugadores.get(turnoJugador).getMano();
+            // Mano manoEnTurno = jugadores.get(turnoJugador).getMano();
             Mano manoEnTurno = jugador.getMano();
-            ArrayList<Carta> cartasJugador = manoEnTurno.getMano();
+            ArrayList<Carta> cartasJugador = manoEnTurno.getCartas();
             int y = (4*HEIGHT_SIZE/5) - cartasJugador.getFirst().getHeight() - HEIGHT_SIZE/18;
             for(int i = 3; i <= 7; i++){
                 Carta carta = cartasJugador.get(i-3);

@@ -2,29 +2,45 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Mano {
-
+    // Atributos
     private ArrayList<Carta> cartas;
 
+    // Constructor, recibe un arreglo de cartas
     public Mano(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
-    public ArrayList<Carta> getMano() {
-        return cartas;
-    }
 
+    //region Getters
+
+    /*
+        Devuelve el arreglo de cartas (Mano) del jugador
+    */
     public ArrayList<Carta> getCartas() {
         return cartas;
     }
+    //endregion
+    
+    //region Operaciones para manipular la mano del jugador
 
+    /*
+        Recibe un entero como la posición de la carta
+        que se quiere remover de la mano del jugador
+    */
     public Carta removerCartaPos(int pos){
         return cartas.remove(pos);
     }
     public void removerCarta(Carta cartaARemover){
         cartas.remove(cartaARemover);
     }
+
+    /*
+        Recibe una carta y la agrega la carta a la mano
+        del jugador
+    */
     public void agregarCarta( Carta carta){
         cartas.add(carta);
     }
+
     public void ocultarCartas(){
         for (Carta carta : cartas) {
             carta.setVisible(false);
@@ -38,12 +54,20 @@ public class Mano {
         }
     }
 
+    /*
+        Ordena la mano del jugador por el valor de la carta
+    */
     public void ordenarMano(){
         cartas.sort(Comparator.comparing(v -> v.getValor()));
     }
+    //endregion
 
-    //region Metodos basicos de comparacion entre cartas
+    //region Métodos para consultar la mano del jugador
 
+    /*
+        Devuelve la cantidad de veces que se repite
+        una carta
+    */
     public int cantidadDeCartasConsecutivas(){
         int contador = 0;
         for(int i=0; i<cartas.size()-1; i++){
@@ -75,16 +99,6 @@ public class Mano {
         return true;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Carta carta : cartas) {
-            sb.append(carta.toString()).append("\n");
-        }
-        return sb.toString();
-    }
-
-
     public boolean hayCartasRepetidas(){
         HashMap<Integer, Integer> mano = new HashMap<>();
 
@@ -114,7 +128,7 @@ public class Mano {
     }
     //endregion
 
-    //region Metodos del ranking de manos
+    //region Métodos del ranking de manos
 
     public Boolean RoyalFlush(){
         if(!mismoPalo()){
@@ -176,6 +190,7 @@ public class Mano {
 
         return valorMasAlto;
     }
+    //endregion
 
     public int obtenerRanking() {
         ordenarMano();
@@ -193,7 +208,15 @@ public class Mano {
         return 1;
     }
 
-    //endregion
+    // Convierte la mano a texto para mostrarla
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Carta carta : cartas) {
+            sb.append(carta.toString()).append("\n");
+        }
+        return sb.toString();
+    }
 
 
 }

@@ -106,6 +106,13 @@ public class Carta extends JLabel {
         return esVisible;
     }
 
+    public String obtenerRutaImagen() {
+        if (!esVisible) {
+            return "images/cartas/reverso.png";
+        }
+        return "images/cartas/" + figura + valor + ".png"; // Ajusta a tu convención
+    }
+
 
     private ImageIcon encontrarIcon() {
         String directorio = "";
